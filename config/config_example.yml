@@ -1,0 +1,22 @@
+general:
+  cloudflare_account_id: "Cloudflare AccountID"
+  environment: "Deployment Environment"
+
+cloudflare:
+  api_key: "Cloudflare API key" # Use CICD to fetch from secret "location"
+  email: "Cloudflare Email"
+  retries: 5
+
+backend_s3: # I will be adding more options | I am working with minio thus "all skips"
+  endpoint: "https://s3endpoint.xyz"
+  access_key: "SUPERSECRETKEY"
+  secret_key: "SUPERSECRETKEY"
+  region: "main"
+  bucket: "NAME_OF_BUCKET"
+  skip_region_validation: True
+  skip_metadata_api_check: True
+  skip_credentials_validation: True
+  force_path_style: True
+
+zones:
+  - name: "example.xyz"
