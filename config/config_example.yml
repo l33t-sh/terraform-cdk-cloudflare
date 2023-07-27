@@ -7,6 +7,8 @@ cloudflare:
   email: "Cloudflare Email"
   retries: 5
 
+# !!! --- Please choose one backend !!! ---
+
 backend_s3: # I will be adding more options | I am working with minio thus "all skips"
   endpoint: "https://s3endpoint.xyz"
   access_key: "SUPERSECRETKEY"
@@ -17,6 +19,16 @@ backend_s3: # I will be adding more options | I am working with minio thus "all 
   skip_metadata_api_check: True
   skip_credentials_validation: True
   force_path_style: True
+
+#backend_azure:
+#  tenant_id: "XXXXXXXXXXXXXXXXX"
+#  client_id: "XXXXXXXXXXXXXXXXX"
+#  client_secret: "XXXXXXXXXXXXXXXXX"
+#  subscription_id: "XXXXXXXXXXXXXXXXX"
+#  resource_group_name: "terraform-resourcegroup"
+#  storage_account_name: "terraform-storage-account"
+#  container_name: "develop"
+#  key: "example"
 
 zones:
   - name: "example.xyz"
