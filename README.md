@@ -53,9 +53,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Special thanks to the Terraform, Terraform CDK and Cloudflare teams for their excellent tools and services.
 
 ### Contact
-If you have any questions or need further assistance, please feel free to contact us:
+If you have any questions or need further assistance, please feel free to contact me:
 
-Email: support@example.com
-Twitter: @example
+Email: nikolas.lucansky@gmail.com
 
 Happy Terraforming! :rocket:
