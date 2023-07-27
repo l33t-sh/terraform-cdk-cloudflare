@@ -1,12 +1,14 @@
 from constructs import Construct
-from cdktf import TerraformStack, S3Backend, Token
+from cdktf import TerraformStack
 
 from cdk_functions.get_config import get_config
+from cdk_functions.backend_s3 import s3_backend
+from cdk_functions.backend_azure import azure_backend
 
 from cdktf_cdktf_provider_cloudflare.provider import CloudflareProvider
 from cdktf_cdktf_provider_cloudflare.data_cloudflare_zone import DataCloudflareZone
 from cdktf_cdktf_provider_cloudflare.zone import Zone
-from cdktf_cdktf_provider_cloudflare.record import Record, RecordData
+from cdktf_cdktf_provider_cloudflare.record import Record
 
 
 class CloudflareStack(TerraformStack):
@@ -15,9 +17,15 @@ class CloudflareStack(TerraformStack):
 
         config = get_config("config/config.yml")
 
-        cf_account_id = config['general']['cloudflare_account_id']
-        target_environment = config['general']['environment']
-        null_value = Token.as_string(Token.null_value())
+        if "backend_azure" in config:
+            azure_backend(self, id, config)
+        elif "backend_s3" in config:
+            s3_backend(self, id, config)
+        else:
+            print("### | {} | No backend specified! Please follow the example readme!".format(
+                id
+            ))
+            exit(1)
 
         CloudflareProvider(
             self,
@@ -25,25 +33,6 @@ class CloudflareStack(TerraformStack):
             api_key=config['cloudflare']['api_key'],
             email=config['cloudflare']['email'],
             retries=config['cloudflare']['retries'],
-        )
-
-        S3Backend(
-            self,
-            endpoint=config['backend_s3']['endpoint'],
-            access_key=config['backend_s3']['access_key'],
-            secret_key=config['backend_s3']['secret_key'],
-            region=config['backend_s3']['region'],
-            bucket=config['backend_s3']['bucket'],
-
-            skip_region_validation=config['backend_s3']['skip_region_validation'],
-            skip_metadata_api_check=config['backend_s3']['skip_metadata_api_check'],
-            skip_credentials_validation=config['backend_s3']['skip_credentials_validation'],
-            force_path_style=config['backend_s3']['force_path_style'],
-
-            key="{}-{}.tfstate".format(
-                target_environment,
-                id
-            )
         )
 
         for zone in config['zones']:
@@ -57,7 +46,7 @@ class CloudflareStack(TerraformStack):
                     "cf-zone-{}".format(
                         zone['name']
                     ),
-                    account_id=cf_account_id,
+                    account_id=config['general']['cloudflare_account_id'],
                     zone=zone['name'],
                 )
             else:
@@ -70,7 +59,7 @@ class CloudflareStack(TerraformStack):
                     "cf-zone-{}".format(
                         zone['name']
                     ),
-                    account_id=cf_account_id,
+                    account_id=config['general']['cloudflare_account_id'],
                     name=zone['name'],
                 )
 
