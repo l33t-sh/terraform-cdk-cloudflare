@@ -2,6 +2,16 @@
 
 This repository contains an example of using Terraform to manage Cloudflare resources. With this Terraform configuration, you can automate the provisioning and management of your Cloudflare settings.
 
+<details>
+  <summary>Features</summary>
+    
+- Azure Backend :x:
+- S3 Backend ✅
+- Cloudflare Zone ✅
+- Cloudflare Record ✅
+- Pytest :x: 
+</details>
+
 ###  Prerequisites
 Before you begin, make sure you have the following installed:
 
