@@ -5,7 +5,7 @@ This repository contains an example of using Terraform to manage Cloudflare reso
 <details>
   <summary>Features</summary>
     
-- Azure Backend :x:
+- Azure Backend ✅
 - S3 Backend ✅
 - Cloudflare Zone ✅
 - Cloudflare Record ✅
