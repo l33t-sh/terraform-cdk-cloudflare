@@ -9,7 +9,8 @@ This repository contains an example of using Terraform to manage Cloudflare reso
 - S3 Backend ✅
 - Cloudflare Zone ✅
 - Cloudflare Record ✅
-- Pytest :x: 
+- Pytest :x:
+- Github Actions :x: 
 </details>
 
 ###  Prerequisites
