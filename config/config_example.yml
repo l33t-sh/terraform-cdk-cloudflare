@@ -20,3 +20,16 @@ backend_s3: # I will be adding more options | I am working with minio thus "all 
 
 zones:
   - name: "example.xyz"
+    create_zone: # True or False (If True, CDK will create DNS zone, if False it will use existing
+    records:
+      - name: "test"
+        type: "CNAME"
+        value: "www.google.com"
+      - name: "test2"
+        type: "A"
+        value: "1.1.1.1"
+        #proxied: False | Optional values
+        #ttl: 60 | Optional values
+        #allow_overwrite: False | Optional values
+        #comment: "test comment" | Optional values
+        #priority: 2 | Optional values
